@@ -7,7 +7,7 @@ resource "harness_platform_gitops_repository" "gitops_repo" {
   repo {
     repo            = var.repo_url
     name            = var.repo_name
-    insecure        = false
+    insecure        = true
     connection_type = "HTTPS_ANONYMOUS"
   }
   upsert = true
