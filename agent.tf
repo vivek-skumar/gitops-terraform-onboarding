@@ -11,15 +11,18 @@ resource "harness_platform_gitops_agent" "gitops_agent" {
   }
 }
 
-
 resource "helm_release" "gitops_agent" {
   name       = "gitops-agent"
-  repository = "https://github.com/vivek-skumar/gitops-helm.git" # Replace with the actual Helm repo URL
-  chart      = "gitops_agent"                # Replace with the actual chart name
-  version    = "0.0.1"                       # Replace with the desired version
+  repository = "https://github.com/vivek-skumar/gitops-helm.harness_platform_gitops_agent" 
+  chart      = "gitops_agent"               
+  version    = "0.0.1"                      
 
+  # Add additional `set` blocks as needed for your chart's configuration
 }
 
+output "gitops_agent_status" {
+  value = helm_release.gitops_agent.status
+}
 
 locals {
   deploy_agent_resources_to_cluster = helm_release.gitops_agent.status == "deployed" ? "Helm chart deployed successfully" : "Helm chart deployment failed"
@@ -27,8 +30,4 @@ locals {
 
 output "deploy_agent_resources_to_cluster" {
   value = local.deploy_agent_resources_to_cluster
-}
-
-output "gitops_agent_status" {
-  value = helm_release.gitops_agent.status
 }
