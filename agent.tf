@@ -19,3 +19,16 @@ resource "helm_release" "gitops_agent" {
   version    = "0.0.1"                       # Replace with the desired version
 
 }
+
+
+locals {
+  deploy_agent_resources_to_cluster = helm_release.gitops_agent.status == "deployed" ? "Helm chart deployed successfully" : "Helm chart deployment failed"
+}
+
+output "deploy_agent_resources_to_cluster" {
+  value = local.deploy_agent_resources_to_cluster
+}
+
+output "gitops_agent_status" {
+  value = helm_release.gitops_agent.status
+}
