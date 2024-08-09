@@ -13,7 +13,7 @@ resource "harness_platform_gitops_agent" "gitops_agent" {
 
 resource "helm_release" "gitops_agent" {
   name       = "gitops-agent"
-  repository = "https://github.com/vivek-skumar/gitops-helm.harness_platform_gitops_agent" 
+  repository = "https://github.com/vivek-skumar/gitops-helm.git" 
   chart      = "gitops_agent"               
   version    = "0.0.1"                      
 
