@@ -16,7 +16,7 @@ data "git_repository" "my_chart_repo" {
   directory  = "gitops-agent"
 }
 
-helm_release "gitops_agent" {
+resource "helm_release" "gitops_agent" {
   name        = "gitops-agent"
   namespace   = "default"
   repository  = data.git_repository.my_chart_repo.repository
